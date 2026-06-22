@@ -24,6 +24,17 @@ spec:
             health:
               ldap:
                 enabled: false
+        extraVolumes:
+          - name: kafbat-config
+            configMap:
+              name: kafbat-config
+        extraVolumeMounts:
+          - name: kafbat-config
+            mountPath: /config
+            readOnly: true
+        extraEnvs:
+          - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+            value: /config/config.yml
         resources:
           requests:
             cpu: 50m
