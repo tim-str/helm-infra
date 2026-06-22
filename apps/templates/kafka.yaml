@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kafka
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: kafka
+    targetRevision: 31.x.x
+    helm:
+      values: |
+        replicaCount: 1
+        controller:
+          replicaCount: 1
+        broker:
+          replicaCount: 1
+        kraft:
+          enabled: true
+        zookeeper:
+          enabled: false
+        persistence:
+          enabled: true
+          storageClass: local-path
+          size: 2Gi
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
