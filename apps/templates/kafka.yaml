@@ -14,7 +14,7 @@ spec:
     helm:
       values: |
         global:
-          imageRegistry: gcr.io
+          imageRegistry: gallery.ecr.aws
           security:
             allowInsecureImages: true
         replicaCount: 1
