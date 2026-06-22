@@ -1,0 +1,6 @@
+apiVersion: v2
+name: localstack
+description: LocalStack — AWS services emulator for local development
+type: application
+version: 0.1.0
+appVersion: "3.8"
