@@ -13,6 +13,8 @@ spec:
     targetRevision: 32.4.3
     helm:
       values: |
+        global:
+          imageRegistry: gcr.io
         replicaCount: 1
         controller:
           replicaCount: 1
